@@ -1,11 +1,11 @@
 package com.example.cinema_at_manhattan.authentication;
 
-import com.example.cinema_at_manhattan.model.User;
 import com.example.cinema_at_manhattan.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -50,9 +50,15 @@ public class JwtUtils {
 
   public String generateToken(String username) {
     Map<String, Object> claims = new HashMap<>();
-    User user = userRepository.findByUsername(username);
-    Long id = user.getId();
-    claims.put("userId", id);
+    userRepository.findByUsername(username).ifPresentOrElse(
+        user -> {
+          Long id = user.getId();
+          claims.put("userId", id);
+        },
+        () -> {
+          throw new BadCredentialsException("Invalid username or password");
+        }
+    );
     return createToken(claims, username);
   }
 

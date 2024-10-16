@@ -2,7 +2,10 @@ package com.example.cinema_at_manhattan.repository;
 
 import com.example.cinema_at_manhattan.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {}
+
+import java.util.Optional;
+
+public interface RoleRepository extends JpaRepository<Role, Long> {
+  Optional<Role> findByName(String name);
+}
