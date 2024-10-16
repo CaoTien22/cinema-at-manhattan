@@ -7,7 +7,7 @@ import org.apache.coyote.BadRequestException;
 import java.util.List;
 
 public interface RoomService {
-  public Room createRoom(RoomDTO roomDTO);
-  public List<Room> getAllRoom();
-  public Room getRoomInfo(long id) throws BadRequestException;
+  Room createRoom(RoomDTO roomDTO);
+  List<Room> getAllRoom();
+  Room getRoomInfo(long id) throws BadRequestException;
 }
