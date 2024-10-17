@@ -47,7 +47,7 @@ docker-compose -f compose-app-db.yaml up -d
 
 ```
 ### 4. Using the APIs:
-- You can use Postman and import the API collection from the ***api_collection.json*** file for testing.
+- You can use Postman and import the API collection from the [**api_collection.json**](api_collection.json) file for testing.
 - Alternatively, access Swagger at: 
 ```angular2html
 http://localhost:8080/swagger-ui/index.html
@@ -55,7 +55,7 @@ http://localhost:8080/swagger-ui/index.html
 - To use the APIs, you need to log in first: 
   - Admin account: admin / admin (used for Create Room and Get All Rooms APIs)
   - User accounts: user_1, user_2, user_3 with corresponding passwords user_1, user_2, user_3 (used for Get Available Seat, Reserve Seat, and Cancel Seat APIs).
-##Application Architecture:
+## Application Architecture:
 ![Architecture Diagram](simple-Architec.png)
 
 ### 1.  Database:
@@ -64,10 +64,10 @@ http://localhost:8080/swagger-ui/index.html
   - Table reserved_seat: stores the coordinates of reserved seats, the userId who reserved them, and the roomId to identify which room they belong to.
 ### 2. MemCache:
   - After loading room information and reserved seats from the database, the system will calculate the layout for that room.
-  - After loading room information and reserved seats from the database, the system will calculate the layout for that room. The layout is a two-dimensional array, where the value 0 represents a vacant seat, and other values represent the userId of the person who reserved that seat.
+  - The layout is a two-dimensional array, where the value 0 represents a vacant seat, and other values represent the userId of the person who reserved that seat.
   - The layout will be cached to reduce the load on the database and minimize the number of calculations.
   - The system will lock the layout by roomId to prevent concurrency issues when multiple users are reserving seats in the same room.
 ### 3. Limitations:
-  - Due to time constraints, the current solutions are not optimized.
+ *Due to time constraints, the current solutions are not optimized.*
   - The use of local cache will not remain accurate when the application is deployed across multiple instances.
   - Implementing Optimistic Lock and Pessimistic Lock at the database level will be better than locking in the code.
