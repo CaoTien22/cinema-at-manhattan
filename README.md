@@ -1,24 +1,4 @@
 
-# Vulcan Labs Test(Latest update, I'm fail)
- If you're candidate and trying to join Vulcan company, follow my exp.
-- [Question](VulcanLabs%20Assignment.pdf).
-
-If you use my code, you will definitely fail. Because I failed, so just use it for reference.
-
-I got the following feedback:
-```angular2html
-No locking mechanism is observed when booking or canceling seats. 
-What would happen if multiple requests attempted actions on the same seat simultaneously?
-Checking seat availability or reserving requires scanning all seats in a room, 
-reducing performance -> Should find a better solution to detect this seat is available or not -> O(1)
-instead of O(n)
-```
-
-- First, constraints like concurrency or O(1) complexity,... are not in the question at all.
-- Second, I checked the lock on each roomId on java, so it is confusing to say that I did not guarantee concurrency (maybe for them, locking on the Database with Pessimistic lock is the truth - if so, maybe you should consider joining this company).
-- Third, O(n) is not necessarily slower than O(1). Caching and minimizing the number of DB accesses may be more efficient than trying to solve the problem at O(1). (That is what I did and it seems they did not read my code, or they are just noob).
-- Finally, if you feel like you're going to spend too much time on this test, skip them, study, and find a better company (don't be like me).
-
 ## Initial Assumptions:
 - Since the prompt does not define what a group is, I assume that seats reserved by the same user will belong to the same group.
 - The system has 2 roles for the APIs:
